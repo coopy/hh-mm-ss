@@ -18,6 +18,7 @@ test('fromMs() test', (t) => {
   t.equal(fromMs(38000, 'mm:ss.sss'), '00:38.000')
   t.equal(fromMs(0, 'hh:mm:ss'), '00:00:00')
   t.equal(fromMs(3600000, 'mm:ss'), '01:00:00')
+  t.equal(fromMs(3600000, 'hh:mm'), '01:00')
 
   // Input validation
   t.throws(() => fromMs(null))
@@ -37,6 +38,7 @@ test('fromS() test', (t) => {
   t.equal(fromS(38, 'mm:ss.sss'), '00:38.000')
   t.equal(fromS(0, 'hh:mm:ss'), '00:00:00')
   t.equal(fromS(3600, 'mm:ss'), '01:00:00')
+  t.equal(fromS(3600, 'hh:mm'), '01:00')
 
   // Input validation
   t.throws(() => fromS(null))

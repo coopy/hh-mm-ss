@@ -78,24 +78,34 @@ function toS (time) {
 
 function formatTime (time, format) {
   let showHr
+  let showS
   let showMs
 
   switch (format.toLowerCase()) {
     case 'hh:mm:ss.sss':
       showHr = true
+      showS = true
       showMs = true
       break
     case 'hh:mm:ss':
       showHr = true
+      showS = true
       showMs = !(!time.miliseconds)
       break
     case 'mm:ss':
       showHr = !(!time.hours)
+      showS = true
       showMs = !(!time.miliseconds)
       break
     case 'mm:ss.sss':
       showHr = !(!time.hours)
+      showS = true
       showMs = true
+      break
+    case 'hh:mm':
+      showHr = true
+      showS = !(!time.seconds)
+      showMs = !(!time.miliseconds)
       break
     default:
       throw new Error('Invalid time format')
@@ -107,7 +117,9 @@ function formatTime (time, format) {
   let sss = zeroFill(3, time.miliseconds)
 
   return (time.negative ? '-' : '') + (showHr ? (
-    showMs ? `${hh}:${mm}:${ss}.${sss}` : `${hh}:${mm}:${ss}`
+    showS ? (
+      showMs ? `${hh}:${mm}:${ss}.${sss}` : `${hh}:${mm}:${ss}`
+    ) : `${hh}:${mm}`
   ) : (
     showMs ? `${mm}:${ss}.${sss}` : `${mm}:${ss}`
   ))
